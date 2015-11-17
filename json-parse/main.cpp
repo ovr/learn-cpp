@@ -20,7 +20,7 @@ int main() {
     boost::property_tree::ptree pt;
     boost::property_tree::read_json(ss, pt);
 
-    auto *user = new User();
+    unique_ptr<User> user(new User());
     user->id = pt.get<long>("id");
     user->name = pt.get<string>("name");
 
@@ -36,8 +36,6 @@ int main() {
             << user->id << endl
             << user->name << endl
             << user->age << endl;
-
-    delete user;
 
     return 0;
 }
