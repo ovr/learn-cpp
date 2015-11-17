@@ -8,6 +8,7 @@ class User {
 public:
     long id;
     string name;
+    int age = 0;
 };
 
 int main() {
@@ -23,9 +24,18 @@ int main() {
     user->id = pt.get<long>("id");
     user->name = pt.get<string>("name");
 
+
+    auto tmp = (pt.get<string>("age"));
+    if (tmp == "null") {
+        cout << "Age is null" << endl;
+    } else {
+        user->age = atoi(tmp.c_str());
+    }
+
     std::cout << "User: " << endl
             << user->id << endl
-            << user->name << endl;
+            << user->name << endl
+            << user->age << endl;
 
     delete user;
 
