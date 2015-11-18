@@ -10,6 +10,7 @@ public:
     long id;
     string name;
     int age = 0;
+    string about;
 };
 
 void parseUser(string inputJSON, map<long, User> *users)
@@ -24,9 +25,15 @@ void parseUser(string inputJSON, map<long, User> *users)
     user->id = pt.get<long>("id");
     user->name = pt.get<string>("name");
 
-    auto tmp = (pt.get<string>("age"));
+    string tmp;
+    tmp = (pt.get<string>("age"));
     if (tmp != "null") {
         user->age = atoi(tmp.c_str());
+    }
+
+    tmp = (pt.get<string>("about"));
+    if (tmp != "null") {
+        user->about = tmp;
     }
 
     users->insert(pair<long, User>(user->id, *user));
